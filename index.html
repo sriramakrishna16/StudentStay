@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentStay - Book Student Rooms Near Your College</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      /* Header & Navigation */
+      header {
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #1e3a8a;
+      }
+
+      .logo img {
+        height: 45px;
+        width: auto;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #6366f1;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 0.7rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: #6366f1;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #4f46e5;
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: #6366f1;
+        border: 2px solid #6366f1;
+      }
+
+      .btn-outline:hover {
+        background: #6366f1;
+        color: white;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 4rem 5%;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      .search-container {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .search-bar {
+        display: flex;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 1rem;
+      }
+
+      .search-bar input {
+        flex: 1;
+        padding: 1rem 2rem;
+        border: none;
+        font-size: 1rem;
+        outline: none;
+      }
+
+      .search-bar button {
+        padding: 1rem 2.5rem;
+        background: #6366f1;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.3s;
+      }
+
+      .search-bar button:hover {
+        background: #4f46e5;
+      }
+
+      .popular-cities {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .city-tag {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.5rem 1.2rem;
+        border-radius: 20px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .city-tag:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* How It Works Section */
+      .how-it-works {
+        padding: 4rem 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .how-it-works h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+      }
+
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .step-card {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 12px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .step-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .step-number {
+        background: #6366f1;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0 auto 1rem;
+      }
+
+      .step-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      /* Properties Section */
+      .properties {
+        padding: 4rem 5%;
+        background: #f8f9fa;
+      }
+
+      .properties-container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .properties h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .properties-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+
+      .property-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        cursor: pointer;
+      }
+
+      .property-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .property-image {
+        width: 100%;
+        height: 250px;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 4rem;
+        position: relative;
+      }
+
+      .property-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.95);
+        color: #6366f1;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: bold;
+      }
+
+      .property-info {
+        padding: 1.5rem;
+      }
+
+      .property-info h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .property-info .location {
+        color: #666;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .property-details {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .property-detail {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .property-info .price {
+        font-size: 1.5rem;
+        color: #6366f1;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .property-info .price span {
+        font-size: 0.9rem;
+        color: #666;
+        font-weight: normal;
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 450px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .modal-header h2 {
+        font-size: 2rem;
+        color: #333;
+      }
+
+      .close {
+        font-size: 2rem;
+        cursor: pointer;
+        color: #666;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #6366f1;
+      }
+
+      .modal-footer {
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .modal-footer a {
+        color: #6366f1;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      /* Footer */
+      footer {
+        background: #1f2937;
+        color: white;
+        padding: 3rem 5%;
+        text-align: center;
+      }
+
+      footer p {
+        margin-bottom: 1rem;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .properties-grid,
+        .steps-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .search-bar {
+          flex-direction: column;
+        }
+
+        .search-bar button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav>
+        <div class="logo">
+          <img
+            src="images/StudentStay-removebg-preview.png"
+            alt="StudentStay"
+          />
+          <span>StudentStay</span>
+        </div>
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#properties">Rooms</a>
+          <a href="#how">How it Works</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="auth-buttons">
+          <button class="btn btn-outline" onclick="openModal('login')">
+            Login/Register
+          </button>
+          <button class="btn btn-primary" onclick="openModal('register')">
+            List Your Property
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <h1>India's Most Trusted Student Housing</h1>
+      <p>Find verified PG accommodations & rooms within minutes</p>
+      <div class="search-container">
+        <div class="search-bar">
+          <input
+            type="text"
+            placeholder="Search by college name, area, or city..."
+          />
+          <button>Search</button>
+        </div>
+        <div class="popular-cities">
+          <span class="city-tag">Rajahmundry</span>
+          <span class="city-tag">Kakinada</span>
+          <span class="city-tag">Vizag</span>
+          <span class="city-tag">Vijayawada</span>
+          <span class="city-tag">Hyderabad</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how">
+      <h2>How It Works</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Search</h3>
+          <p>Enter your college name or preferred area to find nearby rooms</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Compare</h3>
+          <p>
+            Browse through verified listings with photos, prices, and amenities
+          </p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Book Securely</h3>
+          <p>
+            Confirm your choice and secure your accommodation instantly by
+            paying the deposit through our integrated, secure payment gateway.
+          </p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Move In</h3>
+          <p>
+            Complete paperwork, move into your verified safe space, and focus on
+            your studies.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section class="properties" id="properties">
+      <div class="properties-container">
+        <h2>Featured Rooms & PGs</h2>
+        <div class="properties-grid">
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&q=80');
+              "
+            >
+              <span class="property-badge">2 Sharing</span>
+            </div>
+            <div class="property-info">
+              <h3>PG for Boys, Palacharla</h3>
+              <span
+                style="color: #45ad41; font-size: 1.1em; margin-left: 0.8rem"
+              >
+                &#9733;&#9733;&#9733;&#9733; (4.5)
+              </span>
+              <p class="location">
+                <b>Reported as:</b> Quality Food, Boys Favorite
+              </p>
+              <p class="location">📍 Near BVC COLLEGE, 1.5 km</p>
+              <p class="location">📍 GIET COLLEGE, 6.5 km</p>
+
+              <div class="property-details">
+                <span class="property-detail">🛏️ 4 Beds</span>
+                <span class="property-detail">🍽️ Food</span>
+                <span class="property-detail">📶 WiFi</span>
+              </div>
+              <p class="price">₹8,999<span>/month</span></p>
+              <button class="btn btn-primary" style="width: 100%">
+                BOOK NOW
+              </button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&q=80');
+              "
+            >
+              <span class="property-badge">Single</span>
+            </div>
+            <div class="property-info">
+              <h3>PG for Girls, Diwancheruvu</h3>
+              <span
+                style="color: #13eb0b; font-size: 1.1em; margin-left: 0.8rem"
+              >
+                &#9733;&#9733;&#9733;&#9733; (4.8)
+              </span>
+              <p class="location"><b>Most reported as:</b> Safe and Secure</p>
+              <p class="location">📍 GIET Campus, 5 km</p>
+              <p class="location">📍 BVC Campus, 2 km</p>
+              <div class="property-details">
+                <span class="property-detail">🛏️ 1 Bed</span>
+                <span class="property-detail">🍽️ Food</span>
+                <span class="property-detail">🧺 Laundry</span>
+              </div>
+              <p class="price">₹12,999<span>/month</span></p>
+              <button class="btn btn-primary" style="width: 100%">
+                BOOK NOW
+              </button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=80');
+              "
+            >
+              <span class="property-badge">3 Sharing</span>
+            </div>
+            <div class="property-info">
+              <h3>Budget PG Near College</h3>
+              <span
+                style="color: #ffaa00; font-size: 1.1em; margin-left: 0.8rem"
+              >
+                &#9733;&#9733;&#9733;&#9733; (3.7)
+              </span>
+              <p class="location"><b>Reported as:</b> No comfort</p>
+              <p class="location">📍 near Arts College, 0.8 km</p>
+              <p class="location">📍 Aditya College, 6.5 km</p>
+
+              <div class="property-details">
+                <span class="property-detail">🛏️ 3 Beds</span>
+                <span class="property-detail">🍽️ Food</span>
+                <span class="property-detail">📶 WiFi</span>
+              </div>
+              <p class="price">₹6,999<span>/month</span></p>
+              <button class="btn btn-primary" style="width: 100%">
+                BOOK NOW
+              </button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80');
+              "
+            >
+              <span class="property-badge">2 Sharing</span>
+            </div>
+            <div class="property-info">
+              <h3>Spacious Room with Balcony</h3>
+              <p class="location">📍 Near BITS Pilani, 0.3 km</p>
+              <div class="property-details">
+                <span class="property-detail">🛏️ 2 Beds</span>
+                <span class="property-detail">🍽️ Food</span>
+                <span class="property-detail">🧺 Laundry</span>
+              </div>
+              <p class="price">₹9,499<span>/month</span></p>
+              <button class="btn btn-primary" style="width: 100%">
+                BOOK NOW
+              </button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=800&q=80');
+              "
+            >
+              <span class="property-badge">Single</span>
+            </div>
+            <div class="property-info">
+              <h3>Independent Room for Boys</h3>
+              <p class="location">📍 Near Anna University, 1.2 km</p>
+              <div class="property-details">
+                <span class="property-detail">🛏️ 1 Bed</span>
+                <span class="property-detail">🍳 Kitchen</span>
+                <span class="property-detail">📶 WiFi</span>
+              </div>
+              <p class="price">₹11,999<span>/month</span></p>
+              <button class="btn btn-primary" style="width: 100%">
+                BOOK NOW
+              </button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&q=80');
+              "
+            >
+              <span class="property-badge">3 Sharing</span>
+            </div>
+            <div class="property-info">
+              <h3>Girls PG Near Metro</h3>
+              <p class="location">📍 Near Bangalore Univ, 0.6 km</p>
+              <div class="property-details">
+                <span class="property-detail">🛏️ 3 Beds</span>
+                <span class="property-detail">🍽️ Food</span>
+                <span class="property-detail">📶 WiFi</span>
+              </div>
+              <p class="price">₹7,499<span>/month</span></p>
+              <button class="btn btn-primary" style="width: 100%">
+                BOOK NOW
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Welcome Back!</h2>
+          <span class="close" onclick="closeModal('login')">&times;</span>
+        </div>
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label>Email or Phone</label>
+            <input
+              type="text"
+              required
+              placeholder="Enter your email or phone"
+            />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" required placeholder="Enter your password" />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%">
+            Login
+          </button>
+        </form>
+        <div class="modal-footer">
+          <p>
+            Don't have an account?
+            <a href="#" onclick="switchModal('login', 'register')"
+              >Register here</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Create Account</h2>
+          <span class="close" onclick="closeModal('register')">&times;</span>
+        </div>
+        <form onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label>I am a</label>
+            <select required>
+              <option value="">Select</option>
+              <option value="student">Student (Looking for Room)</option>
+              <option value="owner">Property Owner (List Room)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" required placeholder="John Doe" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" required placeholder="your.email@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" required placeholder="+91 XXXXX XXXXX" />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" required placeholder="Create a password" />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%">
+            Register
+          </button>
+        </form>
+        <div class="modal-footer">
+          <p>
+            Already have an account?
+            <a href="#" onclick="switchModal('register', 'login')"
+              >Login here</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-links">
+        <a href="#about">About Us</a>
+        <a href="#terms">Terms & Conditions</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+      <p>&copy; 2025 StudentStay. All rights reserved.</p>
+      <p>Connecting students with verified room accommodations</p>
+    </footer>
+
+    <script>
+      function openModal(type) {
+        const modal = document.getElementById(type + "Modal");
+        modal.classList.add("active");
+      }
+
+      function closeModal(type) {
+        const modal = document.getElementById(type + "Modal");
+        modal.classList.remove("active");
+      }
+
+      function switchModal(closeType, openType) {
+        closeModal(closeType);
+        openModal(openType);
+      }
+
+      function handleLogin(e) {
+        e.preventDefault();
+        alert("Login successful! This would connect to your backend.");
+      }
+
+      function handleRegister(e) {
+        e.preventDefault();
+        alert("Registration successful! This would connect to your backend.");
+      }
+
+      // Close modal when clicking outside
+      window.onclick = function (event) {
+        if (event.target.classList.contains("modal")) {
+          event.target.classList.remove("active");
+        }
+      };
+    </script>
+  </body>
+</html>
