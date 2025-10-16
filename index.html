@@ -105,7 +105,13 @@
 
       /* Hero Section */
       .hero {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background-image: url("images/bg.png"); /* <-- YOUR IMAGE PATH */
+        background-size: cover;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        min-height: 70vh;
+        overflow: hidden;
+        position: relative;
         color: white;
         padding: 4rem 5%;
         text-align: center;
@@ -122,9 +128,15 @@
         opacity: 0.9;
       }
 
+      /* Ensure the hero content (H1, P, search) is on top of the overlay */
+      .hero > * {
+        position: relative;
+        z-index: 2;
+      }
+
       .search-container {
         max-width: 700px;
-        margin: 0 auto;
+        margin: 0 auto; /* Add padding inside the container */
       }
 
       .search-bar {
@@ -166,7 +178,7 @@
       }
 
       .city-tag {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(15, 14, 14, 0.5);
         padding: 0.5rem 1.2rem;
         border-radius: 20px;
         color: white;
@@ -468,12 +480,11 @@
     </style>
   </head>
   <body>
-    <!-- Header -->
     <header>
       <nav>
         <div class="logo">
           <img
-            src="StudentStay-removebg-preview.png"
+            src="images/StudentStay-removebg-preview.png"
             alt="StudentStay"
           />
           <span>StudentStay</span>
@@ -482,7 +493,7 @@
           <a href="#home">Home</a>
           <a href="#properties">Rooms</a>
           <a href="#how">How it Works</a>
-          <a href="#contact">Contact</a>
+          <a href="#contact-us">Contact</a>
         </div>
         <div class="auth-buttons">
           <button class="btn btn-outline" onclick="openModal('login')">
@@ -495,10 +506,13 @@
       </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
-      <h1>India's Most Trusted Student Housing</h1>
-      <p>Find verified PG accommodations & rooms within minutes</p>
+      <h1 style="text-shadow: 0 0 10px #93adc5, 0 0 10px #000000">
+        India's Most Trusted Student Housing
+      </h1>
+      <p style="text-shadow: 0 0 10px #5c62bb, 0 0 10px #000000">
+        Find verified PG accommodations & rooms within minutes
+      </p>
       <div class="search-container">
         <div class="search-bar">
           <input
@@ -517,7 +531,6 @@
       </div>
     </section>
 
-    <!-- How It Works Section -->
     <section class="how-it-works" id="how">
       <h2>How It Works</h2>
       <div class="steps-grid">
@@ -552,7 +565,6 @@
       </div>
     </section>
 
-    <!-- Properties Section -->
     <section class="properties" id="properties">
       <div class="properties-container">
         <h2>Featured Rooms & PGs</h2>
@@ -564,7 +576,7 @@
                 background-image: url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&q=80');
               "
             >
-              <span class="property-badge">2 Sharing</span>
+              <span class="property-badge">4 Sharing</span>
             </div>
             <div class="property-info">
               <h3>PG for Boys, Palacharla</h3>
@@ -597,7 +609,7 @@
                 background-image: url('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&q=80');
               "
             >
-              <span class="property-badge">Single</span>
+              <span class="property-badge">3 sharing</span>
             </div>
             <div class="property-info">
               <h3>PG for Girls, Diwancheruvu</h3>
@@ -606,7 +618,7 @@
               >
                 &#9733;&#9733;&#9733;&#9733; (4.8)
               </span>
-              <p class="location"><b>Most reported as:</b> Safe and Secure</p>
+              <p class="location"><b>Mostly reported as:</b> Safe and Secure</p>
               <p class="location">📍 GIET Campus, 5 km</p>
               <p class="location">📍 BVC Campus, 2 km</p>
               <div class="property-details">
@@ -627,10 +639,10 @@
                 background-image: url('https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=80');
               "
             >
-              <span class="property-badge">3 Sharing</span>
+              <span class="property-badge">6 Sharing</span>
             </div>
             <div class="property-info">
-              <h3>Budget PG Near College</h3>
+              <h3>Budget PG, Rajahmundry</h3>
               <span
                 style="color: #ffaa00; font-size: 1.1em; margin-left: 0.8rem"
               >
@@ -658,11 +670,18 @@
                 background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80');
               "
             >
-              <span class="property-badge">2 Sharing</span>
+              <span class="property-badge">5 Sharing</span>
             </div>
             <div class="property-info">
-              <h3>Spacious Room with Balcony</h3>
-              <p class="location">📍 Near BITS Pilani, 0.3 km</p>
+              <h3>Surya Palace, Tadepalligudem</h3>
+              <span
+                style="color: #d1951d; font-size: 1.1em; margin-left: 0.8rem"
+              >
+                &#9733;&#9733;&#9733;&#9733; (4.0)
+              </span>
+              <p class="location"><b>Reported as:</b>Good</p>
+
+              <p class="location">📍 Near SASI Engineering college, 3.3 km</p>
               <div class="property-details">
                 <span class="property-detail">🛏️ 2 Beds</span>
                 <span class="property-detail">🍽️ Food</span>
@@ -684,8 +703,16 @@
               <span class="property-badge">Single</span>
             </div>
             <div class="property-info">
-              <h3>Independent Room for Boys</h3>
-              <p class="location">📍 Near Anna University, 1.2 km</p>
+              <h3 style="font-size: 22px">RK PG's for Boys, Bhimavaram</h3>
+
+              <span
+                style="color: #1bbb35; font-size: 1.1em; margin-left: 0.8rem"
+              >
+                &#9733;&#9733;&#9733;&#9733; (4.4)
+              </span>
+              <span class="location"><b>Reported as:</b> fair</span>
+
+              <p class="location">📍 Near VISHNU college, 2.2 km</p>
               <div class="property-details">
                 <span class="property-detail">🛏️ 1 Bed</span>
                 <span class="property-detail">🍳 Kitchen</span>
@@ -708,7 +735,7 @@
             </div>
             <div class="property-info">
               <h3>Girls PG Near Metro</h3>
-              <p class="location">📍 Near Bangalore Univ, 0.6 km</p>
+              <p class="location">📍 Near Vizag Univ, 0.6 km</p>
               <div class="property-details">
                 <span class="property-detail">🛏️ 3 Beds</span>
                 <span class="property-detail">🍽️ Food</span>
@@ -724,7 +751,6 @@
       </div>
     </section>
 
-    <!-- Login Modal -->
     <div id="loginModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -759,7 +785,6 @@
       </div>
     </div>
 
-    <!-- Register Modal -->
     <div id="registerModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -806,8 +831,7 @@
       </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
+    <footer id="contact-us">
       <div class="footer-links">
         <a href="#about">About Us</a>
         <a href="#terms">Terms & Conditions</a>
@@ -853,4 +877,3 @@
     </script>
   </body>
 </html>
-
